@@ -15,18 +15,18 @@ router = APIRouter()
 class Item(BaseModel):
     """Use this data model to parse the request body JSON."""
 
-    user : str = Field(..., example='banjo')
-    id : int = Field(..., example=-42)
-    text : str = Field(..., example='kazooie')
+    user : str = Field(..., example='H@xx')
+    comment_id : int = Field(..., example=9360)
+    text : str = Field(..., example='Apple is cool.')
 
     def to_df(self):
         """Convert pydantic object to pandas dataframe with 1 row."""
         return pd.DataFrame([dict(self)])
 
-    @validator('id')
-    def x1_must_be_positive(cls, value):
-        """Validate that id is a positive number."""
-        assert value > 0, f'id == {value}, must be > 0'
+    @validator('comment_id')
+    def comment_id_must_be_positive(cls, value):
+        """Validate that comment_id is a positive number."""
+        assert value > 0, f'comment_id == {value}, must be > 0'
         return value
 
 
