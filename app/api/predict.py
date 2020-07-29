@@ -4,9 +4,9 @@ from fastapi import APIRouter
 
 import pandas as pd
 
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field #validator
 
-from model import func
+#from model import func
 
 log = logging.getLogger(__name__)
 
