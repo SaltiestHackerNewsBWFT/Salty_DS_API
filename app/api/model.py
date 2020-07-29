@@ -54,6 +54,7 @@ def func(id):
       'https://hacker-news.firebaseio.com/v0/item/' + str(id) + '.json')
   x.append(json.loads(html.read()))
   df = pd.DataFrame.from_dict(x)
+  print(df.head())
   df_comments = df[df['type'] == 'comment']
   df_comments['clean_text']= df_comments['text'].map(lambda s:preprocess(s)) 
   df_comments['clean_vader_score'] =   df_comments['clean_text'].apply(
