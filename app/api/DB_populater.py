@@ -20,7 +20,7 @@ engine = create_engine(
 
 data = []
 
-for i in range(0, 10001):
+for i in range(0, 100000):
     html = urllib.request.urlopen(
         'https://hacker-news.firebaseio.com/v0/item/' + str(i) + '.json')
     data.append(json.loads(html.read()))
@@ -32,6 +32,6 @@ df = pd.DataFrame.from_dict(data)
 
 df_new = df.drop(columns = ['deleted', 'dead', 'descendants', 'score', 'kids', 'parent', 'title', 'url'])
 df_new.head(10)
-
-df_new.to_sql("HN_comments", con=engine)
+df_commnt = df_new[df_new['type'] == 'comment']
+#df_comments.to_sql("HN_comments", con=engine)
 
