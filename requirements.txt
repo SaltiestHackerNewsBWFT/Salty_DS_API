@@ -6,6 +6,5 @@ fastapi
 pandas
 plotly
 nltk
-re
+cpython
 vaderSentiment
-warnings
