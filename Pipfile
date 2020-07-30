@@ -17,9 +17,9 @@ pandas = "*"
 uvicorn = "*"
 plotly = "*"
 nltk = "*"
-re = "*"
+cpython = "*"
 vaderSentiment = "*"
-warnings = "*"
+
 
 [requires]
 python_version = "3.7"
