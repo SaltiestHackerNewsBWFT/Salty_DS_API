@@ -93,13 +93,13 @@ def get_cummulative_score_for_user(username):
 
 
 def get_scores_by_user():
-  dir = os.getcwd()
-  file_name = 'hn_sentiments100k.csv'
-  df = pd.read_csv(os.path.normcase(os.path.join(dir, file_name)))
+  #dir = os.getcwd()
+  file_name = 'app/api/hn_sentiments100k.csv'
+  df = pd.read_csv(file_name)[['by','clean_vader_score']]
   df1 = df.groupby(['by']).agg({'clean_vader_score': "sum"})
   df2 = df1.sort_values(['clean_vader_score'], ascending=True)
 
-  return df2
+  return df2.iloc[:101]
 
     
 def main():
