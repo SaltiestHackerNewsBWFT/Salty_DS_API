@@ -33,7 +33,12 @@ class Item(BaseModel):
         return value
 
 
-
+@router.get('/saltiest100')
+def print_saltiest():
+    l_pred = get_scores_by_user()
+    return {
+        'Top 100 Saltiest commenters': l_pred
+        }
 
 @router.post('/predict')
 async def predict(item: Item):
@@ -43,10 +48,10 @@ async def predict(item: Item):
     
     y_pred = get_score_by_comment_id(item.comment_id)
     #U_pred = get_cummulative_score_for_user(item.user_name)
-    l_pred = get_scores_by_user()
+    #l_pred = get_scores_by_user()
     return {
         
         'Score for comment from id': y_pred,
         #'user cumulative comment score': U_pred,
-        'Score for list of comment ids': l_pred
+        #'Score for list of comment ids': l_pred
     }
