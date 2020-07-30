@@ -6,7 +6,7 @@ import pandas as pd
 
 from pydantic import BaseModel, Field, validator
 
-from app.api import model
+import model
 
 log = logging.getLogger(__name__)
 
@@ -40,7 +40,7 @@ async def predict(item: Item):
     X_new = item.to_df()
     log.info(X_new)
     
-    y_pred = model.func(item)
+    y_pred = model.func(item.comment_id)
     
     return {
         
