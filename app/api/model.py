@@ -24,7 +24,7 @@ analyzer = SentimentIntensityAnalyzer()
 lemmatizer = WordNetLemmatizer()
 stemmer = PorterStemmer()
 
-#If you get stopwords error pleasew uncomment the following two lines.
+#If you get stopwords error please uncomment the following two lines.
 # nltk.download('stopwords')
 # nltk.download('wordnet')
 

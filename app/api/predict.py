@@ -18,7 +18,8 @@ class Item(BaseModel):
     """Use this data model to parse the request body JSON."""
 
     
-    comment_id : int = Field(..., example=3425346)
+    comment_id : int = Field(..., example=23970146)
+    user_name : str = Field(..., example='gmfawcett')
     
 
     def to_df(self):
@@ -40,9 +41,10 @@ async def predict(item: Item):
     X_new = item.to_df()
     log.info(X_new)
     
-    y_pred = model.func(item.comment_id)
-    
+    y_pred = model.get_score_by_comment_id(item.comment_id)
+    U_pred = model.get_cummulative_score_for_user(item.user_name)
     return {
         
-        'salt score': y_pred
+        'Score for comment from id': y_pred,
+        'user cumulative comment score': U_pred
     }
