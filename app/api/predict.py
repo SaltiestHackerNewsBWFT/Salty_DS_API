@@ -37,7 +37,7 @@ class Item(BaseModel):
 def print_saltiest():
     l_pred = get_scores_by_user()
     return {
-        'Top 100 Saltiest commenters': l_pred
+        'Top_100_Saltiest': l_pred
         }
 
 @router.post('/predict')
@@ -51,7 +51,7 @@ async def predict(item: Item):
     #l_pred = get_scores_by_user()
     return {
         
-        'Score for comment from id': y_pred,
+        'Score_for_comment_from_id': y_pred,
         #'user cumulative comment score': U_pred,
         #'Score for list of comment ids': l_pred
     }
