@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Wed Jul 29 17:07:08 2020
-
-@author: Ronin
-"""
-
 from warnings import filterwarnings
 filterwarnings("ignore")
 
@@ -16,6 +9,9 @@ import json
 import urllib
 import re
 import pandas as pd
+import os
+
+
 
 
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
@@ -24,9 +20,9 @@ analyzer = SentimentIntensityAnalyzer()
 lemmatizer = WordNetLemmatizer()
 stemmer = PorterStemmer()
 
-#If you get stopwords error please uncomment the following two lines.
-# nltk.download('stopwords')
-# nltk.download('wordnet')
+#If you get stopwords error pleasew uncomment the following two lines.
+nltk.download('stopwords')
+nltk.download('wordnet')
 
 def get_compund_score(text):
         score = analyzer.polarity_scores(text)
@@ -96,8 +92,21 @@ def get_cummulative_score_for_user(username):
   return score
 
 
+def get_scores_by_user():
+  dir = os.getcwd()
+  file_name = 'hn_sentiments100k.csv'
+  df = pd.read_csv(os.path.normcase(os.path.join(dir, file_name)))
+  df1 = df.groupby(['by']).agg({'clean_vader_score': "sum"})
+  df2 = df1.sort_values(['clean_vader_score'], ascending=True)
 
+  return df2
+
+    
 def main():
+
+    out = get_scores_by_user()
+    print (out.head(10))
+
     id = 23970146
     print(f"Score for the comment id {id} is: ",  get_score_by_comment_id(id))
 

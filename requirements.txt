@@ -2,3 +2,10 @@ urllib
 json
 pandas
 logging
+fastapi
+pandas
+plotly
+nltk
+re
+vaderSentiment
+warnings

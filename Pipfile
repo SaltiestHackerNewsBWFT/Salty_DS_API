@@ -16,6 +16,10 @@ fastapi = "*"
 pandas = "*"
 uvicorn = "*"
 plotly = "*"
+nltk = "*"
+re = "*"
+vaderSentiment = "*"
+warnings = "*"
 
 [requires]
 python_version = "3.7"

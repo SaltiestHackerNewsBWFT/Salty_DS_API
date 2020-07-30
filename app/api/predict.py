@@ -6,7 +6,7 @@ import pandas as pd
 
 from pydantic import BaseModel, Field, validator
 
-import model
+from .model import *
 
 log = logging.getLogger(__name__)
 
@@ -19,8 +19,8 @@ class Item(BaseModel):
 
     
     comment_id : int = Field(..., example=23970146)
-    user_name : str = Field(..., example='gmfawcett')
-    
+    #user_name : str = Field(..., example='gmfawcett')
+    #comment_id_list : list = Field(..., example=[23970146,457634])
 
     def to_df(self):
         """Convert pydantic object to pandas dataframe with 1 row."""
@@ -41,10 +41,12 @@ async def predict(item: Item):
     X_new = item.to_df()
     log.info(X_new)
     
-    y_pred = model.get_score_by_comment_id(item.comment_id)
-    U_pred = model.get_cummulative_score_for_user(item.user_name)
+    y_pred = get_score_by_comment_id(item.comment_id)
+    #U_pred = get_cummulative_score_for_user(item.user_name)
+    l_pred = get_scores_by_user()
     return {
         
         'Score for comment from id': y_pred,
-        'user cumulative comment score': U_pred
+        #'user cumulative comment score': U_pred,
+        'Score for list of comment ids': l_pred
     }
