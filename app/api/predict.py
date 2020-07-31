@@ -40,7 +40,7 @@ def print_saltiest():
     
     
     return {
-        '100Saltiest': l_pred
+        'Top_100_Saltiest': l_pred
         }
 
 @router.post('/predict')
@@ -54,7 +54,7 @@ async def predict(item: Item):
     #l_pred = get_scores_by_user()
     return {
         
-        'commentScore': y_pred,
+        'Score_for_comment_from_id': y_pred,
         #'UserScore': U_pred,
         #'Score for list of comment ids': l_pred
     }
