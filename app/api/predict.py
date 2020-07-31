@@ -20,7 +20,7 @@ class Item(BaseModel):
     
     comment_id : int = Field(..., example=23970146)
     #user_name : str = Field(..., example='gmfawcett')
-    #comment_id_list : list = Field(..., example=[23970146,457634])
+    #comment_id_list : list[int] = Field(..., example=[23970146,457634])
 
     def to_df(self):
         """Convert pydantic object to pandas dataframe with 1 row."""
@@ -31,13 +31,16 @@ class Item(BaseModel):
         """Validate that comment_id is a positive number."""
         assert value > 0, f'comment_id == {value}, must be > 0'
         return value
+    
 
 
 @router.get('/saltiest100')
 def print_saltiest():
     l_pred = get_scores_by_user()
+    
+    
     return {
-        'Top_100_Saltiest': l_pred
+        '100Saltiest': l_pred
         }
 
 @router.post('/predict')
@@ -51,7 +54,7 @@ async def predict(item: Item):
     #l_pred = get_scores_by_user()
     return {
         
-        'Score_for_comment_from_id': y_pred,
-        #'user cumulative comment score': U_pred,
+        'commentScore': y_pred,
+        #'UserScore': U_pred,
         #'Score for list of comment ids': l_pred
     }
